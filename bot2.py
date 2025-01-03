@@ -1,3 +1,18 @@
+import os  # Модуль для работы с переменными окружения
+from flask import Flask  # Flask нужен для создания заглушки
+
+app = Flask(__name__)  # Создаётся экземпляр Flask приложения
+
+# Маршрут для главной страницы ("/")
+@app.route('/')
+def home():
+    return "Bot is running!"  # Сообщение, которое покажет сервер
+
+# Основной запуск приложения (слушание порта)
+if __name__ == "__main__":  
+    port = int(os.environ.get('PORT', 5000))  # Получаем порт из окружения или используем 5000
+    app.run(host='0.0.0.0', port=port)  # Запускаем приложение Flask
+
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackContext, CallbackQueryHandler
 import asyncio
