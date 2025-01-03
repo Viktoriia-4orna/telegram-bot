@@ -119,6 +119,16 @@ def start_scheduled_messages(bot, chat_id):
 
 # Стартовая команда
 async def start(update: Update, context: CallbackContext):
+     # Извлекаем данные о пользователе
+    user = update.message.from_user
+    user_id = user.id
+    username = user.username  # Имя пользователя (необязательное поле)
+    first_name = user.first_name  # Имя пользователя (необязательное поле)
+
+    # Сохраняем данные в файл
+    with open("users.txt", "a") as f:
+        f.write(f"ID: {user_id}, Username: {username}, First Name: {first_name}\n")
+        
     chat_id = update.message.chat_id
     await send_welcome_messages(context.bot, chat_id)
     start_scheduled_messages(context.bot, chat_id)
